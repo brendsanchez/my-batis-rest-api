@@ -85,7 +85,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Error de sistema al conseguir usuario")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteUserById(@PathVariable String id) throws UserException {
+    public ResponseEntity<Void> deleteUserById(@PathVariable String id) throws UserException {
         this.service.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
