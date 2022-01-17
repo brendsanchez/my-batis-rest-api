@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 
@@ -73,7 +74,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Error de sistema al conseguir usuario")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable String id) throws UserException {
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") @Min(1) String id) throws UserException {
         return ResponseEntity.ok().body(service.getUserById(id));
     }
 
@@ -85,7 +86,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Error de sistema al conseguir usuario")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteUserById(@PathVariable String id) throws UserException {
+    public ResponseEntity<Void> deleteUserById(@PathVariable("id") @Min(1) String id) throws UserException {
         this.service.deleteUserById(id);
         return ResponseEntity.ok().build();
     }

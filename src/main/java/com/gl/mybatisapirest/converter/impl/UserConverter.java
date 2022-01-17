@@ -22,7 +22,7 @@ public class UserConverter implements Converter<User, UserDto> {
     public User fromDTO(UserDto dto) {
         return User.builder()
                 .name(dto.getName())
-                .username(dto.getUsername())
+                .surname(dto.getSurname())
                 .email(dto.getEmail())
                 .date(dto.getDate())
                 .build();
@@ -31,7 +31,7 @@ public class UserConverter implements Converter<User, UserDto> {
     @Override
     public UserDto fromModel(User user) {
         return UserDto.builder()
-                .username(user.getUsername())
+                .surname(user.getSurname())
                 .name(user.getName())
                 .email(user.getEmail())
                 .date(user.getDate())

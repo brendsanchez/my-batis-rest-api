@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @ControllerAdvice
-public class HandlerException extends ResponseEntityExceptionHandler{
+public class RestResponseStatusExceptionResolver extends ResponseEntityExceptionHandler{
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {

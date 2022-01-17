@@ -4,10 +4,10 @@ import com.gl.mybatisapirest.request.UserUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Component
-public class UpdateUserSupplier implements Function<UserUpdateRequest, Boolean> {
+public class UpdateUserSupplier implements Predicate<UserUpdateRequest> {
     private final UserMapper mapper;
 
     @Autowired
@@ -16,7 +16,7 @@ public class UpdateUserSupplier implements Function<UserUpdateRequest, Boolean> 
     }
 
     @Override
-    public Boolean apply(UserUpdateRequest request) {
+    public boolean test(UserUpdateRequest request) {
         int totalUpdate = this.mapper.updateUser(request);
         return totalUpdate > 0;
     }

@@ -60,13 +60,13 @@ public class UserService {
             throw new EmailExistException(request.getEmail());
         }
 
-        this.insertUserSupplier.apply(request);
+        this.insertUserSupplier.test(request);
 
         user = User.builder()
                 .email(request.getEmail())
                 .date(request.getDate())
                 .name(request.getName())
-                .username(request.getUsername())
+                .surname(request.getSurname())
                 .build();
 
         return UserConverter.getInstance().fromModel(user);
@@ -81,7 +81,7 @@ public class UserService {
         User userRequest = User.builder()
                 .id(request.getId())
                 .name(request.getName())
-                .username(request.getUsername())
+                .surname(request.getSurname())
                 .email(request.getEmail())
                 .date(request.getDate())
                 .build();
@@ -90,13 +90,13 @@ public class UserService {
             throw new UserNotFoundException("difference to update");
         }
 
-        this.updateUserSupplier.apply(request);
+        this.updateUserSupplier.test(request);
 
         return UserConverter.getInstance().fromModel(userRequest);
     }
 
     public void deleteUserById(final String id) throws UserNotFoundException {
-        boolean deleteResponse = this.deleteUserSupplier.apply(id);
+        boolean deleteResponse = this.deleteUserSupplier.test(id);
 
         if (!deleteResponse) {
             throw new UserNotFoundException("user to delete by: " + id);
