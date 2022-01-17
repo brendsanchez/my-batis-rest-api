@@ -20,8 +20,8 @@ public interface UserMapper {
     @Select("<script>" +
             "SELECT id, nombre, apellido, email, fechaNacimiento " +
             "FROM Usuario " +
-            "<if test='id != null'> WHERE id = #{id, jdbcType=VARCHAR} </if>" +
-            "<if test='email != null'> WHERE email = #{email, jdbcType=VARCHAR} </if>" +
+            "<if test='id != null'> WHERE id = #{id} </if>" +
+            "<if test='email != null'> WHERE email = #{email} </if>" +
             "</script>")
     @Results({
             @Result(column = "id", property = "id"),
@@ -39,10 +39,10 @@ public interface UserMapper {
             " email, " +
             " fechaNacimiento) " +
             "VALUES (" +
-            "#{name, jdbcType=VARCHAR}, " +
-            "#{surname, jdbcType=VARCHAR}, " +
-            "#{email, jdbcType=VARCHAR}, " +
-            "#{date, jdbcType=DATE} " +
+            "#{name}, " +
+            "#{surname}, " +
+            "#{email}, " +
+            "#{date} " +
             " ) ")
     @Options(timeout = 10)
     int insertUser(UserInsertRequest request);
@@ -61,6 +61,7 @@ public interface UserMapper {
     int updateUser(UserUpdateRequest request);
 
     @Delete("DELETE FROM Usuario " +
-            "WHERE id = #{userId, jdbcType=VARCHAR}")
+            "WHERE id = #{userId}")
+    @Options(timeout = 10)
     int deleteUser(String userId);
 }
