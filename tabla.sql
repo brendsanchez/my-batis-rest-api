@@ -3,6 +3,6 @@ CREATE TABLE `prueba`.`Usuario` (
   `nombre` VARCHAR(45) NULL,
   `apellido` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
-  `fechaNacimiento` VARCHAR(45) NULL,
+  `fechaNacimiento` DATE NULL,
   PRIMARY KEY (`id`));
 
