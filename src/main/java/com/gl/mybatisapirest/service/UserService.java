@@ -66,7 +66,7 @@ public class UserService {
                 .email(request.getEmail())
                 .date(request.getDate())
                 .name(request.getName())
-                .username(request.getUsername())
+                .surname(request.getSurname())
                 .build();
 
         return UserConverter.getInstance().fromModel(user);
@@ -81,7 +81,7 @@ public class UserService {
         User userRequest = User.builder()
                 .id(request.getId())
                 .name(request.getName())
-                .username(request.getUsername())
+                .surname(request.getSurname())
                 .email(request.getEmail())
                 .date(request.getDate())
                 .build();

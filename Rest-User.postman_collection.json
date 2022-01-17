@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"date\": \"2022-01-16T19:18:32.380Z\",\n  \"email\": \"brendasanchez9310@gmail.com\",\n  \"name\": \"brenda\",\n  \"username\": \"sanchez\"\n}",
+					"raw": "{\n  \"date\": \"2022-01-16T19:18:32.380Z\",\n  \"email\": \"brendasanchez9310@gmail.com\",\n  \"name\": \"brenda\",\n  \"surname\": \"sanchez\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"date\": \"1993-10-10\",\n  \"email\": \"brendasanchez9310@gmail.com\",\n  \"name\": \"brenda sofia\",\n  \"username\": \"sanchez\",\n  \"id\": 1\n}",
+					"raw": "{\n  \"date\": \"1993-10-10\",\n  \"email\": \"brendasanchez9310@gmail.com\",\n  \"name\": \"brenda sofia\",\n  \"surname\": \"sanchez\",\n  \"id\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
