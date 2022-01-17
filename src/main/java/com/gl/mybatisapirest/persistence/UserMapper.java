@@ -26,7 +26,7 @@ public interface UserMapper {
     @Results({
             @Result(column = "id", property = "id"),
             @Result(column = "nombre", property = "name"),
-            @Result(column = "apellido", property = "username"),
+            @Result(column = "apellido", property = "surname"),
             @Result(column = "email", property = "email"),
             @Result(column = "fechaNacimiento", property = "date")
     })
@@ -40,7 +40,7 @@ public interface UserMapper {
             " fechaNacimiento) " +
             "VALUES (" +
             "#{name, jdbcType=VARCHAR}, " +
-            "#{username, jdbcType=VARCHAR}, " +
+            "#{surname, jdbcType=VARCHAR}, " +
             "#{email, jdbcType=VARCHAR}, " +
             "#{date, jdbcType=DATE} " +
             " ) ")
@@ -51,7 +51,7 @@ public interface UserMapper {
             "UPDATE Usuario " +
             "<trim prefix='SET' suffixOverrides=','> " +
             "   <if test='name != null'> nombre = #{name} , </if>" +
-            "   <if test='username != null'> apellido = #{username} , </if>" +
+            "   <if test='surname != null'> apellido = #{surname} , </if>" +
             "   <if test='email != null'> email = #{email} , </if>" +
             "   <if test='date != null'> fechaNacimiento = #{date} , </if>" +
             "</trim>" +

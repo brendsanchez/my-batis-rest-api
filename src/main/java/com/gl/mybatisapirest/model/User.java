@@ -14,7 +14,7 @@ import java.util.Date;
 public class User {
     private String id;
     private String name;
-    private String username;
+    private String surname;
     private String email;
     private Date date;
 }

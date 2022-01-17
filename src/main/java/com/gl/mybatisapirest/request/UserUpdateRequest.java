@@ -14,7 +14,7 @@ public class UserUpdateRequest {
     @NotNull(message = "id is required")
     private String id;
     private String name;
-    private String username;
+    private String surname;
     private String email;
     private Date date;
 }
