@@ -87,7 +87,7 @@ public class UserService {
                 .build();
 
         if (user.equals(userRequest)) {
-            throw new UserNotFoundException("difference to update");
+            throw new UserNotFoundException("difference to update.");
         }
 
         this.updateUserSupplier.test(request);
