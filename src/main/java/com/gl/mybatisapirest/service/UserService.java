@@ -99,6 +99,7 @@ public class UserService {
         boolean deleteResponse = this.deleteUserSupplier.test(id);
 
         if (!deleteResponse) {
+            System.out.println("prueba");
             throw new UserNotFoundException("user to delete by: " + id);
         }
     }
