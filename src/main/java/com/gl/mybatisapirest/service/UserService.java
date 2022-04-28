@@ -37,7 +37,7 @@ public class UserService {
         List<User> userList = this.usersSupplier.apply(user);
 
         if (userList.isEmpty()) {
-            throw new UserNotFoundException("users");
+            throw new UserNotFoundException("users.");
         }
 
         return UserConverter.getInstance().fromModel(userList);
