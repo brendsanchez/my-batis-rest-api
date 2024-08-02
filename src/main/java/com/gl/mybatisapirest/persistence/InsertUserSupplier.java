@@ -1,19 +1,16 @@
 package com.gl.mybatisapirest.persistence;
 
 import com.gl.mybatisapirest.request.UserInsertRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Predicate;
 
 @Component
+@RequiredArgsConstructor
 public class InsertUserSupplier implements Predicate<UserInsertRequest> {
-    private final UserMapper mapper;
 
-    @Autowired
-    public InsertUserSupplier(UserMapper mapper) {
-        this.mapper = mapper;
-    }
+    private final UserMapper mapper;
 
     @Override
     public boolean test(UserInsertRequest request) {

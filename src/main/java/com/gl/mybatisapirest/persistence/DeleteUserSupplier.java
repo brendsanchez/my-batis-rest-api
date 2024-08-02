@@ -1,21 +1,18 @@
 package com.gl.mybatisapirest.persistence;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Predicate;
 
 @Component
-public class DeleteUserSupplier implements Predicate<String> {
+@RequiredArgsConstructor
+public class DeleteUserSupplier implements Predicate<Integer> {
+
     private final UserMapper mapper;
 
-    @Autowired
-    public DeleteUserSupplier(UserMapper mapper) {
-        this.mapper = mapper;
-    }
-
     @Override
-    public boolean test(String userId) {
+    public boolean test(Integer userId) {
         int totalDeleted = this.mapper.deleteUser(userId);
 
         return totalDeleted > 0;

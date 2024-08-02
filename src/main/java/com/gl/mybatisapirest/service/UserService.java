@@ -12,25 +12,20 @@ import com.gl.mybatisapirest.persistence.UpdateUserSupplier;
 import com.gl.mybatisapirest.persistence.UsersSupplier;
 import com.gl.mybatisapirest.request.UserInsertRequest;
 import com.gl.mybatisapirest.request.UserUpdateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UsersSupplier usersSupplier;
-
-    @Autowired
-    private InsertUserSupplier insertUserSupplier;
-
-    @Autowired
-    private UpdateUserSupplier updateUserSupplier;
-
-    @Autowired
-    private DeleteUserSupplier deleteUserSupplier;
+    private final UserConverter userConverter;
+    private final UsersSupplier usersSupplier;
+    private final InsertUserSupplier insertUserSupplier;
+    private final UpdateUserSupplier updateUserSupplier;
+    private final DeleteUserSupplier deleteUserSupplier;
 
     public List<UserDto> getUsers() throws UserNotFoundException {
         User user = User.builder().build();
@@ -40,16 +35,16 @@ public class UserService {
             throw new UserNotFoundException("users.");
         }
 
-        return UserConverter.getInstance().fromModel(userList);
+        return this.userConverter.fromModel(userList);
     }
 
-    public UserDto getUserById(final String id) throws UserNotFoundException {
+    public UserDto getUserById(final Integer id) throws UserNotFoundException {
         User user = User.builder().id(id).build();
         List<User> userList = this.usersSupplier.apply(user);
 
         user = userList.stream().findFirst().orElseThrow(() -> new UserNotFoundException("user by: " + id));
 
-        return UserConverter.getInstance().fromModel(user);
+        return this.userConverter.fromModel(user);
     }
 
     public UserDto insertUser(final UserInsertRequest request) throws UserException {
@@ -64,12 +59,12 @@ public class UserService {
 
         user = User.builder()
                 .email(request.getEmail())
-                .date(request.getDate())
+                .birthday(request.getDate())
                 .name(request.getName())
                 .surname(request.getSurname())
                 .build();
 
-        return UserConverter.getInstance().fromModel(user);
+        return this.userConverter.fromModel(user);
     }
 
     public UserDto updateUser(final UserUpdateRequest request) throws UserNotFoundException {
@@ -83,7 +78,7 @@ public class UserService {
                 .name(request.getName())
                 .surname(request.getSurname())
                 .email(request.getEmail())
-                .date(request.getDate())
+                .birthday(request.getDate())
                 .build();
 
         if (user.equals(userRequest)) {
@@ -92,14 +87,13 @@ public class UserService {
 
         this.updateUserSupplier.test(request);
 
-        return UserConverter.getInstance().fromModel(userRequest);
+        return this.userConverter.fromModel(userRequest);
     }
 
-    public void deleteUserById(final String id) throws UserNotFoundException {
+    public void deleteUserById(final Integer id) throws UserNotFoundException {
         boolean deleteResponse = this.deleteUserSupplier.test(id);
 
         if (!deleteResponse) {
-            System.out.println("prueba");
             throw new UserNotFoundException("user to delete by: " + id);
         }
     }
