@@ -1,19 +1,16 @@
 package com.gl.mybatisapirest.persistence;
 
 import com.gl.mybatisapirest.request.UserUpdateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Predicate;
 
 @Component
+@RequiredArgsConstructor
 public class UpdateUserSupplier implements Predicate<UserUpdateRequest> {
-    private final UserMapper mapper;
 
-    @Autowired
-    public UpdateUserSupplier(UserMapper mapper) {
-        this.mapper = mapper;
-    }
+    private final UserMapper mapper;
 
     @Override
     public boolean test(UserUpdateRequest request) {

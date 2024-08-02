@@ -8,21 +8,21 @@ import java.util.Date;
 import java.util.List;
 
 public class TestUtil {
-    public static final String ID = "1";
+    public static final Integer ID = 1;
 
     private static final User user1 = User.builder()
             .id(ID)
             .name("goku")
             .surname("kakaroto")
             .email("kamehameha@gmail.com")
-            .date(new Date(971210191))
+            .birthday(new Date(971210191))
             .build();
 
     private static final User user2 = User.builder()
             .name("luffy")
             .surname("Monkey")
             .email("gomagoma@gmail.com")
-            .date(new Date(957558991))
+            .birthday(new Date(957558991))
             .build();
 
     public static List<User> userList() {
@@ -34,7 +34,7 @@ public class TestUtil {
                 .surname(user1.getSurname())
                 .name(user1.getName())
                 .email(user1.getEmail())
-                .date(user1.getDate())
+                .date(user1.getBirthday())
                 .build();
     }
 

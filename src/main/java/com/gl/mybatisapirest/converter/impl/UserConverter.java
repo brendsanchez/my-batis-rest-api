@@ -3,20 +3,12 @@ package com.gl.mybatisapirest.converter.impl;
 import com.gl.mybatisapirest.converter.Converter;
 import com.gl.mybatisapirest.dto.UserDto;
 import com.gl.mybatisapirest.model.User;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
-
+@Component
+@NoArgsConstructor
 public class UserConverter implements Converter<User, UserDto> {
-    private static UserConverter instance = null;
-
-    private UserConverter() {
-    }
-
-    public static UserConverter getInstance() {
-        if (instance == null) {
-            instance = new UserConverter();
-        }
-        return instance;
-    }
 
     @Override
     public User fromDTO(UserDto dto) {
@@ -24,7 +16,7 @@ public class UserConverter implements Converter<User, UserDto> {
                 .name(dto.getName())
                 .surname(dto.getSurname())
                 .email(dto.getEmail())
-                .date(dto.getDate())
+                .birthday(dto.getDate())
                 .build();
     }
 
@@ -34,7 +26,7 @@ public class UserConverter implements Converter<User, UserDto> {
                 .surname(user.getSurname())
                 .name(user.getName())
                 .email(user.getEmail())
-                .date(user.getDate())
+                .date(user.getBirthday())
                 .build();
     }
 }

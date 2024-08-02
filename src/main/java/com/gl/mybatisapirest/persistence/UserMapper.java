@@ -18,26 +18,26 @@ import java.util.List;
 public interface UserMapper {
 
     @Select("<script>" +
-            "SELECT id, nombre, apellido, email, fechaNacimiento " +
-            "FROM Usuario " +
+            "SELECT id, name, surname, email, birthday " +
+            "FROM users " +
             "<if test='id != null'> WHERE id = #{id} </if>" +
             "<if test='email != null'> WHERE email = #{email} </if>" +
             "</script>")
     @Results({
             @Result(column = "id", property = "id"),
-            @Result(column = "nombre", property = "name"),
-            @Result(column = "apellido", property = "surname"),
+            @Result(column = "name", property = "name"),
+            @Result(column = "surname", property = "surname"),
             @Result(column = "email", property = "email"),
-            @Result(column = "fechaNacimiento", property = "date")
+            @Result(column = "birthday", property = "birthday")
     })
     List<User> getUsers(User user);
 
 
-    @Insert("INSERT INTO Usuario " +
-            "(nombre, " +
-            " apellido, " +
+    @Insert("INSERT INTO users " +
+            "(name, " +
+            " surname, " +
             " email, " +
-            " fechaNacimiento) " +
+            " birthday) " +
             "VALUES (" +
             "#{name}, " +
             "#{surname}, " +
@@ -48,20 +48,20 @@ public interface UserMapper {
     int insertUser(UserInsertRequest request);
 
     @Update("<script>" +
-            "UPDATE Usuario " +
+            "UPDATE users " +
             "<trim prefix='SET' suffixOverrides=','> " +
-            "   <if test='name != null'> nombre = #{name} , </if>" +
-            "   <if test='surname != null'> apellido = #{surname} , </if>" +
+            "   <if test='name != null'> name = #{name} , </if>" +
+            "   <if test='surname != null'> surname = #{surname} , </if>" +
             "   <if test='email != null'> email = #{email} , </if>" +
-            "   <if test='date != null'> fechaNacimiento = #{date} , </if>" +
+            "   <if test='date != null'> birthday = #{date} , </if>" +
             "</trim>" +
             "WHERE id = #{id}" +
             "</script>")
     @Options(timeout = 10)
     int updateUser(UserUpdateRequest request);
 
-    @Delete("DELETE FROM Usuario " +
+    @Delete("DELETE FROM users " +
             "WHERE id = #{userId}")
     @Options(timeout = 10)
-    int deleteUser(String userId);
+    int deleteUser(Integer userId);
 }

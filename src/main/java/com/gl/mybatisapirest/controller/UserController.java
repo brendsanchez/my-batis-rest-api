@@ -10,17 +10,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.Min;
 import java.util.List;
@@ -29,10 +29,10 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 @Api(tags = {SwaggerConfig.USER})
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService service;
+    private final UserService service;
 
     @ApiOperation(value = "Consulta informacion de todos los usuarios.")
     @ApiResponses(value = {
@@ -74,21 +74,21 @@ public class UserController {
             @ApiResponse(code = 500, message = "Error de sistema al conseguir usuario")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") @Min(1) String id) throws UserException {
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") @Min(1) Integer id) throws UserException {
         return ResponseEntity.ok().body(service.getUserById(id));
     }
 
     @ApiOperation(value = "Eliminar usuario por id.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Exito al eliminar usuario"),
+            @ApiResponse(code = 204, message = "Exito al eliminar usuario"),
             @ApiResponse(code = 400, message = "El id requerido"),
             @ApiResponse(code = 404, message = "No existe usuario con ese Id para eliminar"),
             @ApiResponse(code = 500, message = "Error de sistema al conseguir usuario")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable("id") @Min(1) String id) throws UserException {
+    public ResponseEntity<Void> deleteUserById(@PathVariable("id") @Min(1) Integer id) throws UserException {
         this.service.deleteUserById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }

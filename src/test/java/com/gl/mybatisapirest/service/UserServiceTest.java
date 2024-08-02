@@ -1,5 +1,6 @@
 package com.gl.mybatisapirest.service;
 
+import com.gl.mybatisapirest.converter.impl.UserConverter;
 import com.gl.mybatisapirest.dto.UserDto;
 import com.gl.mybatisapirest.exception.EmailExistException;
 import com.gl.mybatisapirest.exception.UserException;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
@@ -25,11 +27,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
+
+    @Spy
+    private UserConverter userConverter;
 
     @Mock
     private UsersSupplier usersSupplier;
@@ -82,7 +88,7 @@ class UserServiceTest {
                 .name(TestUtil.getUser1().getName())
                 .surname(TestUtil.getUser1().getSurname())
                 .email(TestUtil.getUser1().getEmail())
-                .date(TestUtil.getUser1().getDate())
+                .date(TestUtil.getUser1().getBirthday())
                 .build();
 
         when(usersSupplier.apply(any())).thenReturn(Collections.emptyList());
@@ -116,7 +122,7 @@ class UserServiceTest {
                 .name(TestUtil.getUser1().getName())
                 .surname(TestUtil.getUser1().getSurname())
                 .email(TestUtil.getUser1().getEmail())
-                .date(TestUtil.getUser1().getDate())
+                .date(TestUtil.getUser1().getBirthday())
                 .build();
 
         when(usersSupplier.apply(any())).thenReturn(Collections.singletonList(TestUtil.getUser1()));
@@ -130,7 +136,7 @@ class UserServiceTest {
                 .name("Test")
                 .surname(TestUtil.getUser1().getSurname())
                 .email(TestUtil.getUser1().getEmail())
-                .date(TestUtil.getUser1().getDate())
+                .date(TestUtil.getUser1().getBirthday())
                 .build();
 
         when(usersSupplier.apply(any())).thenReturn(Collections.singletonList(TestUtil.getUser1()));
@@ -151,13 +157,13 @@ class UserServiceTest {
 
     @Test
     void deleteUserValid() throws UserNotFoundException {
-        when(deleteUserSupplier.test(any(String.class))).thenReturn(true);
+        when(deleteUserSupplier.test(anyInt())).thenReturn(true);
         service.deleteUserById(TestUtil.ID);
     }
 
     @Test
     void deleteUserNotFound() {
-        when(deleteUserSupplier.test(any(String.class))).thenReturn(false);
+        when(deleteUserSupplier.test(anyInt())).thenReturn(false);
         assertThrows(UserNotFoundException.class, () -> service.deleteUserById(TestUtil.ID));
     }
 }

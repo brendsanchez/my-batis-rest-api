@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 public class UserUpdateRequest {
     @NotNull(message = "id is required")
-    private String id;
+    private Integer id;
     private String name;
     private String surname;
     private String email;
